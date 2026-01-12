@@ -52,3 +52,12 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
+
+
+# Visual Studio
+.vs/
+**/.vs/
+
+# Copilot Chat (extra safety)
+**/copilot-chat/
+**/*.vsidx
