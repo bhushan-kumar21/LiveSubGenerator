@@ -1,20 +1,39 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:LiveSubgenerator.ViewModels"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="LiveSubgenerator.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="LiveSubgenerator">
+        Title="Live Subtitles"
+        Width="600" Height="200"
+        Background="Transparent"
+        TransparencyLevelHint="Transparent"
+        SystemDecorations="None"
+        Topmost="True"
+        CanResize="True">
 
-    <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
+	<Grid RowDefinitions="Auto, *">
+		<Border Grid.Row="0" Background="#CC222222" CornerRadius="5,5,0,0"
+                PointerPressed="OnPointerPressed">
+			<DockPanel Margin="10,5">
+				<Button Content="_" Click="OnMinimizeClick" DockPanel.Dock="Right"
+                        Background="Transparent" Foreground="White"/>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+				<StackPanel Orientation="Horizontal" Spacing="10">
+					<TextBlock Text="Language:" VerticalAlignment="Center" Foreground="Gray" FontSize="12"/>
+					<ComboBox SelectedIndex="0"
+                              Width="120"
+                              ItemsSource="{Binding AvailableLanguages}"
+                              SelectedItem="{Binding SelectedLanguage}">
+					</ComboBox>
+				</StackPanel>
+			</DockPanel>
+		</Border>
 
+		<Border Grid.Row="1" Background="#AA000000" CornerRadius="0,0,5,5">
+			<TextBlock Text="{Binding SubtitleText}"
+                       Foreground="White" FontSize="24" FontWeight="Bold"
+                       TextAlignment="Center" VerticalAlignment="Center"
+                       TextWrapping="Wrap" Margin="10"/>
+		</Border>
+	</Grid>
 </Window>
